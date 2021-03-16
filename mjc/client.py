@@ -3,6 +3,7 @@ from urllib.parse import urljoin
 
 import requests
 from lxml import etree
+import json
 
 from mjc.helpers import *
 
@@ -22,7 +23,35 @@ class Client:
                     late_start: bool = False, short_term=None, start_date: str = None, end_date: str = None,
                     start_time=None, end_time=None, class_status=None, max_wait_list: int = -1,
                     instructor_last_name: str = None, include_columbia_college: bool = False):
+        """Fetches courses from MJC Course Search.
 
+        Returns JSON data of courses that match the criteria.
+
+        Args:
+            term: A school term from the Term enum.
+            subject: The course subject from a Subject enum.
+            course_number: Optional. A course number.
+            section_number: Optional. A section number.
+            title_keyword: Optional. Part of the title of the course.
+            zero_textbook_cost: Optional. True to filter for courses where textbooks are free.
+            campus: Optional. The campus you'd like the course to be on from a Campus enum. Blank is all.
+            environment: Optional. The learning environment form an Environment enum. Blank is all.
+            meet_days: Optional. The days of the week you'd like the course to meet. Blank is all.
+            late_start: Optional. True if you want late start courses.
+            short_term: Optional. First Half or Second Half of the term courses from a ShortTerm enum. Blank ignores the criteria.
+            start_date: Optional. The start day of the course.
+            end_date: Optional. The end day of the course.
+            start_time: Optional. The start time of the course.
+            end_time: Optional. The end time of the course.
+            class_status: Optional. Open or closed. Blank is both.
+            max_wait_list: Optional. Maximum number of students on wait list.
+            instructor_last_name: Optional. The last name of the instructor of the course.
+            include_columbia_college: Optional. True to include courses offered by Columbia College at MJC.
+
+        Returns:
+            Json data for each section that matches the criteria.
+
+        """
         response = self.session.get(urljoin(self._HOST, 'mjcclasssearch'))
         self.session.cookies.update(response.cookies.get_dict())
         root = etree.fromstring(response.text, parser=etree.HTMLParser(encoding='utf8'))
@@ -59,13 +88,20 @@ class Client:
 
         response = self.session.post(urljoin(self._HOST, '/mjcclasssearch/SearchCriteria.aspx'), data=payload)
         root = etree.fromstring(response.text, parser=etree.HTMLParser(encoding='utf8'))
-        table = root.xpath("//table[@id='ctl00_ContentPlaceHolder1_tbl_Result']")[0]
+        try:
+            table = root.xpath("//table[@id='ctl00_ContentPlaceHolder1_tbl_Result']")[0]
+        except IndexError:
+            return {}
 
         rows = iter(table)
         headers = [col.text for col in next(rows)]
+        json_data = {'data': []}
         for row in rows:
             values = [col.text for col in row]
-            print(dict(zip(headers, values)))
+            data = dict(zip(headers, values))
+            # data.pop('null')
+            json_data['data'].append(data)
+        return json.dumps(json_data)
 
     def _payload_option_handler(self, input):
         payload = {}
