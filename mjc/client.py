@@ -1,9 +1,9 @@
+import json
 from collections import deque
 from urllib.parse import urljoin
 
 import requests
 from lxml import etree
-import json
 
 from mjc.helpers import *
 
@@ -99,7 +99,6 @@ class Client:
         for row in rows:
             values = [col.text for col in row]
             data = dict(zip(headers, values))
-            # data.pop('null')
             json_data['data'].append(data)
         return json.dumps(json_data)
 

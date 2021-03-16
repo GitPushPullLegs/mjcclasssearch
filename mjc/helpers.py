@@ -11,6 +11,7 @@ class Environment(enum.Enum):
     online = 'ctl00$ContentPlaceHolder1$cb_Onl'
     hybrid = 'ctl00$ContentPlaceHolder1$cb_Hyb'
 
+
 class MeetDays(enum.Enum):
     sunday = 'ctl00$ContentPlaceHolder1$cb_Sun'
     monday = 'ctl00$ContentPlaceHolder1$cb_Mon'
@@ -20,13 +21,16 @@ class MeetDays(enum.Enum):
     friday = 'ctl00$ContentPlaceHolder1$cb_Fri'
     saturday = 'ctl00$ContentPlaceHolder1$cb_Sat'
 
+
 class ShortTerm(enum.Enum):
     first_half = 'ctl00$ContentPlaceHolder1$cb_ShortTerm01'
     second_half = 'ctl00$ContentPlaceHolder1$cb_ShortTerm02'
 
+
 class ClassStatus(enum.Enum):
     open = 'ctl00$ContentPlaceHolder1$cb_Open'
     closed = 'ctl00$ContentPlaceHolder1$cb_Closed'
+
 
 class Term(enum.Enum):
     spring_2021 = '2021MSP'
