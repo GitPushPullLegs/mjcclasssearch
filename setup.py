@@ -2,6 +2,7 @@ from setuptools import setup
 
 setup(
     name='mjcclasssearch',
+    version='0.0.1',
     description="A small package to fetch course data from MJC's class search.",
     url='https://github.com/GitPUshPullLegs/mjcclasssearch',
     author='Joe Aguilar',
