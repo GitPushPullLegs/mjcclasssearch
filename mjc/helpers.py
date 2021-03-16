@@ -1,8 +1,36 @@
 import enum
 
 
+class Campus(enum.Enum):
+    east_campus = 'ctl00$ContentPlaceHolder1$cb_East'
+    west_campus = 'ctl00$ContentPlaceHolder1$cb_West'
+    off_campus = 'ctl00$ContentPlaceHolder1$cb_OffCamp'
+
+
+class Environment(enum.Enum):
+    online = 'ctl00$ContentPlaceHolder1$cb_Onl'
+    hybrid = 'ctl00$ContentPlaceHolder1$cb_Hyb'
+
+class MeetDays(enum.Enum):
+    sunday = 'ctl00$ContentPlaceHolder1$cb_Sun'
+    monday = 'ctl00$ContentPlaceHolder1$cb_Mon'
+    tuesday = 'ctl00$ContentPlaceHolder1$cb_Tue'
+    wednesday = 'ctl00$ContentPlaceHolder1$cb_Wed'
+    thursday = 'ctl00$ContentPlaceHolder1$cb_Thu'
+    friday = 'ctl00$ContentPlaceHolder1$cb_Fri'
+    saturday = 'ctl00$ContentPlaceHolder1$cb_Sat'
+
+class ShortTerm(enum.Enum):
+    first_half = 'ctl00$ContentPlaceHolder1$cb_ShortTerm01'
+    second_half = 'ctl00$ContentPlaceHolder1$cb_ShortTerm02'
+
+class ClassStatus(enum.Enum):
+    open = 'ctl00$ContentPlaceHolder1$cb_Open'
+    closed = 'ctl00$ContentPlaceHolder1$cb_Closed'
+
 class Term(enum.Enum):
     spring_2021 = '2021MSP'
+
 
 class Subject(enum.Enum):
     All = 'All'
