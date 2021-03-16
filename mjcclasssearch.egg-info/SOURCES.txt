@@ -1,0 +1,10 @@
+README.md
+setup.py
+mjc/__init__.py
+mjc/client.py
+mjc/helpers.py
+mjcclasssearch.egg-info/PKG-INFO
+mjcclasssearch.egg-info/SOURCES.txt
+mjcclasssearch.egg-info/dependency_links.txt
+mjcclasssearch.egg-info/requires.txt
+mjcclasssearch.egg-info/top_level.txt
