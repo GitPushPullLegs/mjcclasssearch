@@ -19,7 +19,10 @@ class Client:
 
     def get_courses(self, term: Term, subject: Subject = Subject.All, course_number=None, section_number=None,
                     title_keyword=None, zero_textbook_cost: bool = False, campus=None, environment=None, meet_days=None,
-                    late_start: bool = False, short_term=None, start_date: str = None, end_date: str = None, start_time=None, end_time=None, class_status=None, max_wait_list:int=-1, instructor_last_name:str = None, include_columbia_college: bool = False):
+                    late_start: bool = False, short_term=None, start_date: str = None, end_date: str = None,
+                    start_time=None, end_time=None, class_status=None, max_wait_list: int = -1,
+                    instructor_last_name: str = None, include_columbia_college: bool = False):
+
         response = self.session.get(urljoin(self._HOST, 'mjcclasssearch'))
         self.session.cookies.update(response.cookies.get_dict())
         root = etree.fromstring(response.text, parser=etree.HTMLParser(encoding='utf8'))
